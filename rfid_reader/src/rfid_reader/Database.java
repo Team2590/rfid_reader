@@ -74,11 +74,18 @@ package rfid_reader;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.StringWriter;
-
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date; // Apparently Berkeley DB cannot persist Java8 MonthDay objects. So use the old date object
 import java.util.Map;
@@ -226,8 +233,45 @@ public class Database {
     	Map<String, DatabaseUserTimelog> users_timelog_map;
     	DatabaseUserTimelog user_timelog;
     	
+    	// Ug. When trying to use System.out on Windows, the output file is ALWAYS UTF-16 no matter what I did. 
+    	// Specify the OutputStream's charset, running the entire jvm with -Dfile.encodin=ISO8859-1, converting Strings to Latin-1 bytes...
+    	// It all failed. Just writing straight to plain file works fine - I get plain text - no UTF-16 encoding (easily seen with emacs)
+    	// Symptoms are that the first two charcters are lowercase y-with-an-umlaut and thorn (decimal 255 and 254, U-00FE,  U-00FF ).
+    	// That's the Bye Order Mark (BOM). This is annoying and irrelevant for UTF-8 (only makes sense for multi-byte encodings like UTF-16 where
+    	// it indicates the byte order). Our CSV files have every character prepended with a null (^@ in emacs) which indicates they 
+    	// are being written in UTF-16?
+  
+    	try {
+			System.setOut(new PrintStream(System.out, true, StandardCharsets.ISO_8859_1.name()));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
     	BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out));
-    	CSVWriter 	 writer = new CSVWriter(stdout); 
+    	//BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.ISO_8859_1));
+
+/*    	
+    	BufferedWriter stdout = null;
+    	
+    	try {
+			stdout = new BufferedWriter(new OutputStreamWriter(new PrintStream(System.out, true, StandardCharsets.ISO_8859_1.name())));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+*/    	
+    	
+    	//PrintStream p = new PrintStream
+/*
+    	Writer stdout = null;
+		try {
+			//stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"), StandardCharsets.ISO_8859_1);
+			stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"));
+
+		} catch (IOException e1) {		
+			e1.printStackTrace();
+		}
+  */  	
+    	CSVWriter writer = new CSVWriter(stdout); 
+
     	
     	try {
 
@@ -251,6 +295,19 @@ public class Database {
     		
     		// Write CSV to stdout 
     		String [] s	= new String [] {"Date", "Name", "Checkins", "Total Time"};
+
+    		/*
+    		String [] s 	= new String[4];
+    		String date 		= new String(s1[0].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
+    		String name 		= new String(s1[1].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
+    		String checkin 		= new String(s1[2].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
+    		String total_time 	= new String(s1[3].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
+    		s[0] = date; 
+    		s[1] = name;
+    		s[2] = checkin; 
+    		s[3] = total_time;
+    		*/
+    		
     		writer.writeNext(s, false); 						// Write the header, quote only when needed
     		
     		for (DatabaseDay dd : dds) {						// For each day

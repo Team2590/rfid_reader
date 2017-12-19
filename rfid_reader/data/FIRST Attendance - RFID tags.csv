@@ -1,89 +1,115 @@
-ï»¿RFID,Name,LoginMsg,LogoutMsg
-C9980C90,"Wolfe, Peter",Hey baby!!,Hasta la vista baby!!
-49550490,"Wolfe, Joy",With the new day comes new strength and new thoughts.,What you do today can improve all your tomorrows.
-A9E20490,"Ruch, John",The secret of getting ahead is getting started.,The past cannot be changed. The future is yet in your power.
-396D0E90,"Keller, Jeff",Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.,"Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning."
-29280B90,"Young, Karen","If you can dream it, you can do it.",Insanity: doing the same thing over and over again and expecting different results.
-39920C90,"Young, Thomas","Good, better, best. Never let it rest. 'Til your good is better and your better is best.",We cannot solve our problems with the same thinking we used when we created them.
-191F0990,"Vash, Shilpa",Believe you can and you're halfway there.,Try to be a rainbow in someone's cloud.
-A9920C90,"Borowski, Pete",Someone is sitting in the shade today because someone planted a tree a long time ago.,Insanity: doing the same thing over and over again and expecting different results.
-E9450E90,,,
-C96C0E90,,,
-496D0E90,,,
-896D0E90,,,
-69410E90,,,
-298F0C90,"Aikins, Araba",Are you a carbon sample? Because I want to date you.,I think you're suffering from a lack on vitamin ME!
+RFID,Name,LoginMsg,LogoutMsg
+298F0C90,"Aikins, Araba",Are you a carbon sample? Because I want to date you.,I think you're suffering from a lack of vitamin ME!
+D5F2AED2,"Alamleh, Zakariya",Hi again. I still love you...,"Saying goodbye doesn't mean anything. It's the time we spent together that matters, not how we left it."
 DDA300F3,"Anderson, Nicholas","Unless you puke, faint, or die, keep going!","Compete with yourself, not others. "
-7D6E00F3,"Anderson, Sarah",OK people. Let's do this!,"There are no goodbyes for us. Wherever you are, you will always be in my heart."
 6D6F00F3,"Began, Matthew",I hope your day is a nice as your butt. ,Go confidently in the direction of your dreams. Live the life you've imagined.  
-DDA200F3,"Began, Nicholas",There is no one giant step that does it. It's a lot of little steps. ,It takes courage to lef go of the familiar and embrace the new. 
+DDA200F3,"Began, Nicholas",There is no one giant step that does it. It's a lot of little steps. ,It takes courage to let go of the familiar and embrace the new. 
 9DA400F3,"Billings, Sophie","If the plan doesn't work, change the plan - but never the goal. ","If you're brave enough to say goodbye, life will reward you with a new hello."
+4575AFD2,"Blando,Jonny",Hello! I'm the happiness fairy and I've sprinkled happy dust on you. Now smile dammit. This crap is expensive.,I've become more comfortable as time has gone on with saying goodbye because... I've been having so many conversations about the cyclical nature of life. It just keeps going.
 BD6A00F3,"Block, Nikki",Get with Rachel and make America great again!!!,"Don't cry because it's over, smile because it happened."
 8D6D00F3,"Boac, Jarelle","Forget hydrogen, you're my number one element.","This is not a goodbye, my darling, this is a thank you."
+A9920C90,"Borowski, Pete",Someone is sitting in the shade today because someone planted a tree a long time ago.,Insanity: doing the same thing over and over again and expecting different results.
 AD6B00F3,"Choi, Dahany","Just in case no one told you today: 
 1) Good morning 
 2) I believe in you 
 3) You're doing great 
 4) Nice butt",Has anyone told you today just how awesome you are?
-4D6A00F3,"Christiansen, Jeremy",don't stope when you are tired. Stop when you are done. ,Man's feelings are always purest and most glowing in the hour of meeting and of farewell.
+D576AFD2,D'Amico Emmy,And so the adventure begins!!!,"The reason it hurts so much to separate is because our souls are connected. Maybe they always have been and will be. Maybe we've lived a thousand lives before this one and in each of them we've found each other. And maybe each time, we've been forced apart for the same reasons. That means that this goodbye is both a goodbye for the past ten thousand years and a prelude to what will come."
+75F1AED2,"Davidoff, Stephen",Work hard so that someday your signature will be called an autograph,"We'll meet again, 
+Don't know where, Don't know when, 
+But I know we’ll meet again, some sunny day."
 9D6C00F3,"D'Cruz, Ashleigh",You go girl!,"Great is the art of beginning, but greater is the art of ending."
-75F1AED2,"Davidoff, Stephen",Work hard so that someday you signature will be called an autograph,"We'll meet again, 
-Don't know where,Don't know when, 
-But I know weâ€™ll meet again, some sunny day."
 15F1AED2,"Fox, Matt",Be so good they cannot ignore you,"Goodbyes make you think. They make you realize what you've had, what you've lost, and what you've taken for granted."
+F575AFD2,"Ganesh, Aditya",Hello there handsome!,"When I go to a party, nobody says hello. But when I leave, everybody says goodbye."
 45F0AED2,"Gillmer, Rachel",Get with Nikki and make America great again!!!,Be sweet parakeet
 A5F0AED2,"Glassband, Jared",Welcome other Jared,"I'll miss you, other Jared..."
-2573AFD2,"Grewal, Gurveer",Being positive in a negative situation is not naive. It's leadership. ,"To part is the lot of all mankind. The world is a scene of constant leave-taking, and the hands that grasp in cordial greeting today, are doomed ere long to unite for the the last time, when the quivering lips pronounce the word â€“ Farewell."
+2573AFD2,"Grewal, Gurveer",Being positive in a negative situation is not naive. It's leadership. ,"To part is the lot of all mankind. The world is a scene of constant leave-taking, and the hands that grasp in cordial greeting today, are doomed ere long to unite for the the last time, when the quivering lips pronounce the word – Farewell."
 A572AFD2,"Hamid, Dayyan",I never dreamed about success. I worked for it. ,Anything is possible if you've got enough nerve. 
-F572AFD2,"Hofenbitzer, Connor","Good mornong, you sexy beast",Auf wiedersehen. Gesundheit
-2572AFD2,"John, Nikita",Everything you do now is for your future. Think about that. ,The pain of parting is nothing to the joy of meeting again.
+9575AFD2,"Harris, Zach","Hello from the other side, buckle up and stay alive!",You’ve changed me forever. And I’ll never forget you.
+F572AFD2,"Hofenbitzer, Connor","Welcome, you sexy beast",Auf wiedersehen. Gesundheit
+E9450E90,"Hornish, Conor",Hello gorgeous!!,"I was trying to feel some kind of good-bye. I mean I’ve left schools and places I didn’t even know I was leaving them. I hate that. I don’t care if it’s a sad good-bye or a bad good-bye, but when I leave a place I like to know I’m leaving it. If you don’t you feel even worse."
+A574AFD2,"Joseph, Mathew",Good morning sunshine!!,"Good bye may seem forever. Farewell is like the end, but in my heart is the memory and there you will always be."
 C571AFD2,"Keller, Alex",I didn't come this far to only come this far.,"Goodbyes are not forever, 
 Goodbyes are not the end. 
 They simply mean I'll miss you, 
 Until we meet again."
-7572AFD2,"Kumar, Arrshia",You are capable of amazing things. Impress me. ,How lucky I am to have something that makes saying goodby so hard...
+D5F1AED2,"Keller, Jeff",Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.,"Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning."
+7572AFD2,"Kumar, Arrshia",You are capable of amazing things. Impress me. ,How lucky I am to have something that makes saying goodbye so hard...
 25F7ACD2,"Lanka, Bhargavi",Is your name Wi-Fi? Because I'm feeling a connection.,You may be far from my sight but you are never gone from my heart...
+0575AFD2,"Lichtenstein, Josh","Dear universe, I am totally open to some awesome coming my way.",Parting is such sweet sorrow that I shall say goodnight till it be morrow.
+0574AFD2,"Lonarkar, Daniel",Keep calm and build an ass-kicking robot. ,"At last, the wheel comes full circle."
 85F7ACD2,"Mandrekar, Richa",You know you are on the right track when sleep becomes an inconvenience,I started missing you as soon as you signed out...
+C96C0E90,"Marincas, Alex","The more I learn about you Alex, the more I like my dog. ","You get use to someone - start to like them, even - and they leave. In the end, everyone leaves."
 E5F7ACD2,"Marincas, Danny",I'm not telling you it's going to be easy. I'm telling you it's going to be worth it,Someday you'll see the reason there is Good in goodbye
-656EADD2,"Marsch, Emily",Don't underestimate the power of coffee and a girl with a dream..,A photograph is the pause button of life...
-056DADD2,"Mathews, Peter",Wake up. Kick butt. Repeat. ,I want to be your favorite hello and hardest goodbye. 
 456EADD2,"Mathews, Michael",Failure is another steppingstone to greatness.,"You have brains in your head, you have feet in your shoes, you can steer yourself any direction you choose"
-85FEACD2,"Mavrodakis, Matt",Never give up on a dream just because of the time it will take. The time will pass anyway. ,You'll never be bored when you try soemething new. There's really no limit to what you can do!
-35FEACD2,"McMurty, Mariko","He asked my favorite position. I said ""CEO"". And then I broke his arm...",Only brush the teeth you want to keep. 
+056DADD2,"Mathews, Peter",Wake up. Kick butt. Repeat. ,I want to be your favorite hello and hardest goodbye. 
+85FEACD2,"Mavrodakis, Matt",Never give up on a dream just because of the time it will take. The time will pass anyway. ,You'll never be bored when you try something new. There's really no limit to what you can do!
+A573AFD2,"McMurty, Mariko","He asked my favorite position. I said ""CEO"". And then I broke his arm...",Only brush the teeth you want to keep. 
 D5FDACD2,"Mehl, Constance",It's a great day to have a great day!,Why fit it when you are born to stand out?
-658CABD2,"Menon, Pranav",You are going to have a great day!,"A person is a person, no matter how small! Dr. Seuss"
+658CABD2,"Menon, Pranav",Say hello to my little friend!!,"A person is a person, no matter how small! Dr. Seuss"
 D58BABD2,"Miller, Jared",Welcome other Jared,"I'll miss you, other Jared..."
 15FDACD2,"Padhye, Harsh",I should probably kick some ass today,You have to be odd to be number one. 
 75FDACD2,"Patlolla, Likhitha",Say yes. And you'll figure it out afterwards.,"May misfortune follow you the rest of your life, and never catch up."
 656DADD2,"Patterson, Kayla",You can!!,Today I shall behave as if this is the day I will be remembered
-656CADD2,"Poravanthattil, Joshua","If not now, when?","As you slide down the banisters of life, may the splinters never point the wrong way."
-256CADD2,"Quon, Amanda",Your only limit is you...,Was it right or was I right?
+2572AFD2,"Penzone, Damian",Everything you do now is for your future. Think about that. ,The pain of parting is nothing to the joy of meeting again.
+656CADD2,"Peter, Jonas K","If not now, when?","As you slide down the banisters of life, may the splinters never point the wrong way."
+256CADD2,"Quon, Amanda",Don't underestimate the power of coffee and a girl with a dream...,"a flower knows, when its butterfly will return,
+and if the moon walks out, the sky will understand;
+but now it hurts, to watch you leave so soon,
+when I don't know, if you will ever come back."
 956CADD2,"Quon, Nolan",You did not wake up today to be mediocre. ,In every job that must be done there is an element of fun
-65FCACD2,"Ram, Roshan",You do not get the ass you want by sitting on it,May the saddest day of your future be no worse than the happiest day of your past.
-05FCACD2,"Ruch, Julia",You will kick ass today,Isn't it funny how day by day nothing changes but when you look back everhting is different...
+65FCACD2,"Rahman, Rebekah",You do not get the ass you want by sitting on it,May the saddest day of your future be no worse than the happiest day of your past.
+A9E20490,"Ruch, John",The secret of getting ahead is getting started.,The past cannot be changed. The future is yet in your power.
+05FCACD2,"Ruch, Julia",You will kick ass today,Isn't it funny how day by day nothing changes but when you look back everything is different...
 B5FCACD2,"Sankaran, Manu",Stay positive. Work hard. Make it happen. ,"Despite my ghoulish reputation, I really have the heart of a small boy. I keep it in a jar on my desk."
-158AABD2,"Savanur, Chinmay","Don't half-ass anything. Whatever you do, use you full ass. ",And will you succeed? Yes! You will indeed (98 and 3/4 percent) guaranteed!
+15F2AED2,"Savanur, Apoorva",You will never have this day again. Make it count.,See you later alligator!
+158AABD2,"Savanur, Chinmay","Don't half-ass anything. Whatever you do, use your full ass. ",And will you succeed? Yes! You will indeed (98 and 3/4 percent) guaranteed!
 C5FBACD2,"Sawant, Rahul",Dreams don't work unless you do,"One, two, Freddy's coming for you.  
 Three, four, better lock your door. 
 Five, six, grab your crucifix. 
 Seven, eight, gonna stay up late. 
 Nine, ten, never sleep again."
-35FBACD2,"Serra, Morgan",A little progress each day adds up,"You're off to great places, today is your day, your mountain is waiting, so get on your way. "
+35FBACD2,"Serra, Morgan",A little progress each day adds up.,"You're off to great places, today is your day, your mountain is waiting, so get on your way. "
 95FBACD2,"Silberberg, Ethan",You can stay but your clothes must go...,It's better to know how to learn than to know
-756BADD2,"Sudarshan, Aneesh",Good things come to those who work their asses off!,All that awesome is such a little boy...
+756BADD2,"Sudarshan, Aneesh",Good things come to those who work their asses off!,All that awesome in such a little boy...
 B56BADD2,"Varughese, Noel",You only live once. Might as well be a badass!,"Today was good, today was fun, tomorrow is another one."
-15F2AED2,"Vinogradov, Kirill",You will never have this day again. Make it count.,Se you later alligator!
+191F0990,"Vash, Shilpa",Believe you can and you're halfway there.,Try to be a rainbow in someone's cloud.
+7D6E00F3,"Velliangiri, Kavya",OK people. Let's do this!,"There are no goodbyes for us. Wherever you are, you will always be in my heart."
+4D6A00F3,"Whitlock, Sara",Don't stop when you are tired. Stop when you are done. ,Man's feelings are always purest and most glowing in the hour of meeting and of farewell.
+49550490,"Wolfe, Joy",With the new day comes new strength and new thoughts.,What you do today can improve all your tomorrows.
+047C4862BC2B80,"Wolfe, Peter",Hey baby!!,Hasta la vista baby!!
 75F2AED2,"Young, Kaitlyn",Never let anyone treat you like a yellow starburst. You are a pink starburst. ,Bye bye butterfly
-D5F2AED2,, ,
-4575AFD2,,,
-8576AFD2,,,
-D576AFD2,,,
-F575AFD2,,,
-9575AFD2,,,
-A574AFD2,,,
-0575AFD2,,,
-0574AFD2,,,
-A573AFD2,,,
-5574AFD2,,,
-D5F1AED2,,,
-047C4862BC2B80,,,
+29280B90,"Young, Karen","If I met me, I would say a quick hello and then think that I was a really nice girl. ",Do not go gentle into that good night.
+39920C90,"Young, Thomas","Good, better, best. Never let it rest. 'Til your good is better and your better is best.",We cannot solve our problems with the same thinking we used when we created them.
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,

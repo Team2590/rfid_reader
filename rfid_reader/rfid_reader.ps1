@@ -40,7 +40,8 @@ try
 
     Set-location $PSScriptRoot  # cd to execution dir
 
-    #java -classpath "bin;lib\*" rfid_reader.RFIDreader
+    #java "-Dfile.encoding=ISO-8859-1" -classpath $cp rfid_reader.RFIDreader $args
+
     java -classpath $cp rfid_reader.RFIDreader $args
 }
 finally
