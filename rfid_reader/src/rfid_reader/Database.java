@@ -246,9 +246,14 @@ public class Database {
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
+ 
+    	
+/*
+    	// Leaving the name here stdout - which is now an anachronism given the above restriction - I can't
+    	// really write string to System.out. Hoping to someday fine a solution that works. 
     	BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out));
     	//BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.ISO_8859_1));
-
+*/
 /*    	
     	BufferedWriter stdout = null;
     	
@@ -259,8 +264,8 @@ public class Database {
 		}
 */    	
     	
-    	//PrintStream p = new PrintStream
-/*
+  
+
     	Writer stdout = null;
 		try {
 			//stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"), StandardCharsets.ISO_8859_1);
@@ -269,7 +274,7 @@ public class Database {
 		} catch (IOException e1) {		
 			e1.printStackTrace();
 		}
-  */  	
+   	
     	CSVWriter writer = new CSVWriter(stdout); 
 
     	
@@ -293,21 +298,9 @@ public class Database {
 	    	}
 */
     		
-    		// Write CSV to stdout 
+    		// Write CSV header to stdout 
     		String [] s	= new String [] {"Date", "Name", "Checkins", "Total Time"};
 
-    		/*
-    		String [] s 	= new String[4];
-    		String date 		= new String(s1[0].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
-    		String name 		= new String(s1[1].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
-    		String checkin 		= new String(s1[2].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
-    		String total_time 	= new String(s1[3].getBytes(Charset.forName("ISO-8859-1")), Charset.forName("ISO-8859-1"));
-    		s[0] = date; 
-    		s[1] = name;
-    		s[2] = checkin; 
-    		s[3] = total_time;
-    		*/
-    		
     		writer.writeNext(s, false); 						// Write the header, quote only when needed
     		
     		for (DatabaseDay dd : dds) {						// For each day
