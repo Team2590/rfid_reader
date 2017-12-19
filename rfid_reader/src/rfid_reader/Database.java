@@ -265,7 +265,8 @@ public class Database {
 */    	
     	
   
-
+    	// Geez louise I give up. Just write to a stupid file cause I cannot bend console output to my ISO-88590-1 will
+    	// and end up with UTF-16 files. 
     	Writer stdout = null;
 		try {
 			//stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"), StandardCharsets.ISO_8859_1);
