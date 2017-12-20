@@ -61,4 +61,4 @@ if (Test-Path $current_file) {
 }
 
 # Generate the new report
-powershell -noprofile -executionpolicy bypass -file $PSScriptRoot\rfid_reader.ps1 --report > $current_file
+powershell -noprofile -executionpolicy bypass -file $PSScriptRoot\rfid_reader.ps1 --report
