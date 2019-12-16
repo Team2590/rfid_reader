@@ -13,6 +13,8 @@
  * 		the idea of storing the timestamp and cumulative data on the RFID tag. Downside of that: Children can hack the data unless
  * 		we layer on encryption/other annoying security. Or we just trust the evil children? No, since we plan to 
  * 		support barcodes, we don't want to do anything that is device specific like on-device storage. 
+ * 		The cardcode support is predicated on a barcoder reader that behaves like a keyboard!!  It reads the barcode
+ * 		and sends it to stdin (with a hard return!!!)
  *   
  * 		The original project started by Mr. Meredith was based on Processing (the java-based language). 
  * 		Processing makes it easy to create GUIs but is pretty horrible to code and debug in. That
@@ -86,44 +88,17 @@ import java.time.format.DateTimeFormatter;
  
 
 
-public class RFIDreader {
+public class RFIDreader implements Runnable {
 	private static Database db;
 
-	/**
-	 * Initialize the card readers and process cards
-	 * 
-	 * @param args	array of command line arguments
-	 */
 	
-    public static void main(String[] args) {
-    	
-    	Card card = null;
+	public void run() {
+
+		Card card = null;
 		CardChannel channel = null;		
 		// Command to get data from the card on the reader
 		CommandAPDU command = new CommandAPDU(new byte[] { (byte) 0xFF, (byte) ISO7816.INS_GET_DATA, (byte) 0x00, (byte) 0x00, (byte) 0x00 });
 
-
-    	parseCommandLine(args);
-    	
-    	// Initialise our DB
-    	db = new Database();
-    	db.DBinit(Constants.DATABASE_DIR, false);		/* Open the DB for read/write */
- 
-    	
-    	
-    	
-    	// Initialize tag-to-user database
-    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING_FILENAME);
-
-    	// ZonedDateTime.now( ZoneId.of( "America/New_York" )) for a fixed timezone
-    	// System we're running on MUST have proper time/timezone set!!!
-    	ZonedDateTime current_time = ZonedDateTime.now();						// Format is: 2017-09-04T02:51:39.905-04:00[America/New_York]		
-    	DateTimeFormatter formatter =
-    			DateTimeFormatter.ofPattern(Constants.dateTimeFormatPattern); 	// Format is nicer YYYY-MM-DD time tz
-    	System.out.println("Validate that the current time is: " + 
-    			formatter.format(current_time)); 
-    	
-   	
 	    try {
 	        
  
@@ -144,14 +119,13 @@ public class RFIDreader {
 	            }
 	        }
 	
-		    System.out.println("Place you card/tag/etc. on the reader to start"); 
+		    //System.out.println("Place you card/tag/etc. on the reader to start"); 
 
 		    
 	        while (  (card = waitForCard(acr122)) != null ) {			// loop forever scanning for user input
 	        	
 	        	try {
 		        	
-	        		Constants.LoginType login_type; 
 					channel = card.getBasicChannel();
 									
 					ResponseAPDU response = channel.transmit(command);	// Get Data command returns the card UID
@@ -164,36 +138,10 @@ public class RFIDreader {
 					
 					} else {
 						String UID = bin2hex(response.getData());
-						Debug.log("UID: " + UID);
-						UserTag user = UserTags.getUser(UID, Constants.TagType.RFID); 
+						Debug.log("RFID UID: " + UID);
 						
-						if (user != null) {
-							Debug.log("User is: " + user);		
-
-							login_type = db.write(user.getUsername());	// Add this user's scan in or out to the DB
-							
-							switch (login_type) {						// and print a customized message
-							case LOGIN:
-								System.out.println("Signing in: " 	+ user.getUsername() + ". " + user.getUserLoginMsg());	
-								break;
-
-							case LOGOUT:
-								System.out.println("Signing out: " + user.getUsername() + ". " + user.getUserLogoutMsg());	
-								break;
-							
-							case INVALID_TIME_SPAN:
-								System.err.println("ERROR: login/outs cannot span multiple days. Login again. ");
-								break;
-							
-							default:									// Should never get here!
-								System.err.println("ERROR: unknown login type. Please report this to a mentor.");
-								break;	
-							} // end switch
-							
-							
-						} else {										// Unknown tag
-							System.out.println("Hey!!! Your RFID tag: " + UID + " is not in the database. Please see a mentor! Thanks.");
-						}
+						write_user(UID, Constants.TagType.RFID);		
+					
 					}
 	        	} catch (Exception e) {
 	        		System.err.println("ERROR: problem processing card:");
@@ -247,7 +195,50 @@ public class RFIDreader {
 			e.printStackTrace(System.err);
 	 	}
 
+		
+	}
+	
+	
+	/**
+	 * Initialize the card readers and process cards
+	 * 
+	 * @param args	array of command line arguments
+	 */
+	
+    public static void main(String[] args) {
+    	
+    	
 
+    	parseCommandLine(args);
+    	
+    	// Initialise our DB
+    	db = new Database();
+    	db.DBinit(Constants.DATABASE_DIR, false);		/* Open the DB for read/write */
+ 
+    	
+    	
+    	
+    	// Initialize tag-to-user database
+    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING_FILENAME);
+
+    	// ZonedDateTime.now( ZoneId.of( "America/New_York" )) for a fixed timezone
+    	// System we're running on MUST have proper time/timezone set!!!
+    	ZonedDateTime current_time = ZonedDateTime.now();						// Format is: 2017-09-04T02:51:39.905-04:00[America/New_York]		
+    	DateTimeFormatter formatter =
+    			DateTimeFormatter.ofPattern(Constants.dateTimeFormatPattern); 	// Format is nicer YYYY-MM-DD time tz
+    	System.out.println("Validate that the current time is: " + 
+    			formatter.format(current_time)); 
+    	
+    	//System.out.println("Place your card/tag/etc. on the reader to start"); 
+    	System.out.println("Place your RFID tag on the reader to login in or out"); 
+    	System.out.println("OR read you school ID with the bardcode reader"); 
+    	System.out.println("OR type in your student ID number..."); 
+    	
+    	(new Thread(new RFIDreader())).start(); // Start reading from the RFID card reader
+    	Runnable barcode_reader_thread = new BardcodeReaderThread();
+    	Thread barcode_reader = new Thread(barcode_reader_thread);
+    	barcode_reader.start();					// Start reading from stdin
+    	
     	
 	 } // end main
 
@@ -330,7 +321,7 @@ public class RFIDreader {
 	            }
 	        }
 	
-		    System.out.println("Place you card/tag/etc. on the reader to start"); 
+		    
 			while (  (card = waitForCard(terminals)) != null ) {
 	        	
 	        	card.beginExclusive();							// Only our thread should process this card
@@ -441,4 +432,47 @@ public class RFIDreader {
 	    return String.format("%0" + (data.length * 2) + "X", new BigInteger(1,data));
 	}
 
+	/*
+	 *   Given a user's ID and type (either RFID or barcode), write to the DB
+	 *   Synchonize to prevent threading issues even though I *think* the DB layer
+	 *   would protect us (it's supposed to be thread safe) but this is simple and guarantees 
+	 *   single writer at a time for the DB...
+	 */
+	public synchronized static void write_user(String uid, Constants.TagType type) {
+		String tagtype_name = (type == Constants.TagType.RFID) ? "RFID tag" : "Student ID";
+		Constants.LoginType login_type; 
+
+		UserTag user = UserTags.getUser(uid, type); 
+		
+		if (user != null) {
+			Debug.log("User is: " + user);
+			Debug.log("Scanning in via a " + tagtype_name);		
+
+			login_type = db.write(user.getUsername());	// Add this user's scan in or out to the DB
+			
+			switch (login_type) {						// and print a customized message
+			case LOGIN:
+				System.out.println("Signing in: " 	+ user.getUsername() + ". " + user.getUserLoginMsg());	
+				break;
+
+			case LOGOUT:
+				System.out.println("Signing out: " + user.getUsername() + ". " + user.getUserLogoutMsg());	
+				break;
+			
+			case INVALID_TIME_SPAN:
+				System.err.println("ERROR: login/outs cannot span multiple days. Login again. ");
+				break;
+			
+			default:									// Should never get here!
+				System.err.println("ERROR: unknown login type. Please report this to a mentor.");
+				break;	
+			} // end switch
+		} else {										// Unknown tag. Your RFID tag or Your Student ID....
+			System.out.println("Hey!!! Your " + tagtype_name + ": " + uid + " is not in the database. Please see a mentor! Thanks.");
+		}
+
+	}
+	
+	
+	
 }
