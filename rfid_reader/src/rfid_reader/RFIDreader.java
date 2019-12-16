@@ -149,7 +149,7 @@ public class RFIDreader implements Runnable {
 	        		if (Debug.isEnabled()) {
 	        			e.printStackTrace();
 	        		}
-	        		System.err.println("Pleaes try again. If the problem continues, please tell a mentor.");        		        		
+	        		System.err.println("Please try again. If the problem continues, please tell a mentor.");        		        		
 	        	} finally {
 	        		try {
 	        			//card.endExclusive();
