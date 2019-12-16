@@ -10,7 +10,9 @@
  * 		This reader can process MiFare Classic RFID tags (and other tag types). See https://en.wikipedia.org/wiki/MIFARE
  * 		There are 1K tags which can store 1024 byes and 4K tags. I think we've been buying only 1K tags.
  * 		We aren't actually storing any data on tag today - only reading it's ID. However, I'm toying with 
- * 		the idea of storing the timestamp and cumulative data
+ * 		the idea of storing the timestamp and cumulative data on the RFID tag. Downside of that: Children can hack the data unless
+ * 		we layer on encryption/other annoying security. Or we just trust the evil children? No, since we plan to 
+ * 		support barcodes, we don't want to do anything that is device specific like on-device storage. 
  *   
  * 		The original project started by Mr. Meredith was based on Processing (the java-based language). 
  * 		Processing makes it easy to create GUIs but is pretty horrible to code and debug in. That
@@ -111,7 +113,7 @@ public class RFIDreader {
     	
     	
     	// Initialize tag-to-user database
-    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING);
+    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING_FILENAME);
 
     	// ZonedDateTime.now( ZoneId.of( "America/New_York" )) for a fixed timezone
     	// System we're running on MUST have proper time/timezone set!!!
@@ -145,13 +147,10 @@ public class RFIDreader {
 		    System.out.println("Place you card/tag/etc. on the reader to start"); 
 
 		    
-	        while (  (card = waitForCard(acr122)) != null ) {
+	        while (  (card = waitForCard(acr122)) != null ) {			// loop forever scanning for user input
 	        	
 	        	try {
-		        	// Keep getting failures at endExclusive: Exclusive access not assigned to current Thread
-	        		// Dunno why. Skip it for now
-	        		//card.beginExclusive();							// Only our thread should process this card
-
+		        	
 	        		Constants.LoginType login_type; 
 					channel = card.getBasicChannel();
 									
@@ -166,16 +165,14 @@ public class RFIDreader {
 					} else {
 						String UID = bin2hex(response.getData());
 						Debug.log("UID: " + UID);
-						UserTag user = UserTags.getUser(UID); 
+						UserTag user = UserTags.getUser(UID, Constants.TagType.RFID); 
 						
 						if (user != null) {
 							Debug.log("User is: " + user);		
 
-							// PJW: TODO: Is the user logging in or out? Won't know until the DB back end is done
-							// For now, assume a login and print that message
-							login_type = db.write(user.getUsername());
+							login_type = db.write(user.getUsername());	// Add this user's scan in or out to the DB
 							
-							switch (login_type) {
+							switch (login_type) {						// and print a customized message
 							case LOGIN:
 								System.out.println("Signing in: " 	+ user.getUsername() + ". " + user.getUserLoginMsg());	
 								break;
@@ -188,7 +185,7 @@ public class RFIDreader {
 								System.err.println("ERROR: login/outs cannot span multiple days. Login again. ");
 								break;
 							
-							default:
+							default:									// Should never get here!
 								System.err.println("ERROR: unknown login type. Please report this to a mentor.");
 								break;	
 							} // end switch
@@ -276,6 +273,9 @@ public class RFIDreader {
     				System.exit(0);
 
     			} else if (argument.startsWith("--date")) {						// --date="yyyy/MM/dd hh:mm"
+    				// Specify a later date to simulate the passage of time. IOW, scan in a bunch of tags normally and then 
+    				// restart with --date specifying a later date/time for the scan out. Allows you to test across multiple 
+    				// days as well. 
     				if (argument.contains("=")) {
         				String s[] = argument.split("=");
         				if (s.length > 1 && !s[1].isEmpty()) {
@@ -370,6 +370,8 @@ public class RFIDreader {
 	 * @param terminals		We can have multiple readers. Scan all readers for cards
 	 * @return				Connects to the card on the reader and returns the resulting Card object 
 	 * @throws CardException
+	 * 
+	 * Notes: I've never tested with multiple readers!!!
 	 */
     private static Card waitForCard(CardTerminals terminals) {
 

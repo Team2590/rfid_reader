@@ -25,7 +25,7 @@ public class Tester {
 		
 
 		// Initialize tag-to-user database
-    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING_TESTING);
+    	UserTags.read_user_tags(Constants.USER_RFIDTAG_MAPPING_TESTING_FILENAME);
 		
     	// Populate a test database with 6 weeks of data (the entire build season)
     	// for 60 users each day, where each user has logged in and out twice each day
@@ -55,7 +55,7 @@ public class Tester {
 		    
 		    // For each of the 60 student test RFID tags - Login for this day
 		    for (int i = 10001; i < 10060; i++ ) {  	
-		    	UserTag user = UserTags.getUser(Integer.toString(i));
+		    	UserTag user = UserTags.getUser(Integer.toString(i), Constants.TagType.RFID);
 		    	Debug.log("User is: " + user);	
 		    	db.write(user.getUsername());
 		    }
@@ -66,7 +66,7 @@ public class Tester {
 		    
 		    // For each of the 60 student test RFID tags - Logout for this day
 		    for (int i = 10001; i < 10060; i++ ) { 	
-		    	UserTag user = UserTags.getUser(Integer.toString(i));
+		    	UserTag user = UserTags.getUser(Integer.toString(i), Constants.TagType.RFID);
 		    	Debug.log("User is: " + user);	
 		    	db.write(user.getUsername());
 		    }	    

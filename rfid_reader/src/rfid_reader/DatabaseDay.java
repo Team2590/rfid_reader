@@ -14,7 +14,7 @@ import java.util.Map;
 // A Day is a list of UserTimelog records 
 // The relationship between a Day and a UserTimelog is many to one: Each day
 // can have multiple UserTimelog records. 
-// There is onely ONE UserTimlog record per day
+// There is only ONE UserTimlog record per user
 
 @Entity
 public class DatabaseDay {

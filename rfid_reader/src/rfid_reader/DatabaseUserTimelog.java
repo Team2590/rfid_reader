@@ -85,7 +85,7 @@ public class DatabaseUserTimelog {
 			return null;
 		}
 		
-		// pjw: TODO: Make sure timeIn and timeOut are on the same day!!!! cannot span days!!!
+		// Make sure timeIn and timeOut are on the same day!!!! cannot span days!!!
     	SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
     	String timeIn_day  = sd.format(timeIn);					// This is just the year/month/day
     	String current_day = sd.format(date);

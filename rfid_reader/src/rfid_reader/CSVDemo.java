@@ -34,7 +34,7 @@ public class CSVDemo {
 	        CSVReader reader = new CSVReader(new FileReader(ADDRESS_FILE));
 	        String[] nextLine;
 	        while ((nextLine = reader.readNext()) != null) {
-	            System.out.println("Tag: [" + nextLine[0] + "]\nName: [" + nextLine[1] + "]\nLogin: [" + nextLine[2] + "]\nLogout: [" + nextLine[3] + "]");
+	            System.out.println("Tag: [" + nextLine[0] + "]\nBarcode: [" + nextLine[1] +"]\nName: [" + nextLine[2] + "]\nLogin: [" + nextLine[3] + "]\nLogout: [" + nextLine[4] + "]");
 	        }
 
 /**	        

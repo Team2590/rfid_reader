@@ -8,7 +8,7 @@
  *  
  *  	What DB? We want a simple embedded DB. There are MANY with varying feature and complexity. 
  *  	We choose KISS here and are using standard Berkley DB (cause that's all we need). Basically
- *  	B-tree indexes access. 
+ *  	B-tree indexed access. 
  *  
  *  	Our table will be indexed by day (primary key) and username (secondary key) 
  *  	The "value" data for each day
@@ -205,6 +205,7 @@ public class Database {
                 txn.commit();
             } else {
                 txn.abort();
+                Debug.log("ERROR: Transaction aborted!!! for user: " + user);
             }       	
         }
     	
@@ -229,7 +230,7 @@ public class Database {
      */	
     public void reportFromDB() throws DatabaseException {
         
-    	EntityCursor<DatabaseDay> dds = dayByDate.entities();
+    	EntityCursor<DatabaseDay> dds = dayByDate.entities();	// Database days
     	Map<String, DatabaseUserTimelog> users_timelog_map;
     	DatabaseUserTimelog user_timelog;
     	
@@ -242,15 +243,15 @@ public class Database {
     	// are being written in UTF-16?
   
     	try {
-			System.setOut(new PrintStream(System.out, true, StandardCharsets.ISO_8859_1.name()));
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
+	    System.setOut(new PrintStream(System.out, true, StandardCharsets.ISO_8859_1.name()));
+    	} catch (UnsupportedEncodingException e1) {
+    		e1.printStackTrace();
+    	}
  
     	
 /*
     	// Leaving the name here stdout - which is now an anachronism given the above restriction - I can't
-    	// really write string to System.out. Hoping to someday fine a solution that works. 
+    	// really write string to System.out. Hoping to someday find a solution that works. 
     	BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out));
     	//BufferedWriter stdout = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.ISO_8859_1));
 */
@@ -266,11 +267,11 @@ public class Database {
     	
   
     	// Geez louise I give up. Just write to a stupid file cause I cannot bend console output to my ISO-88590-1 will
-    	// and end up with UTF-16 files. 
+    	// and end up with UTF-16 files which google sheets chokes on. 
     	Writer stdout = null;
 		try {
-			//stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"), StandardCharsets.ISO_8859_1);
-			stdout = Files.newBufferedWriter(Paths.get("./sync/current.csv"));
+			//stdout = Files.newBufferedWriter(Paths.get(REPORT_FILENAME), StandardCharsets.ISO_8859_1);
+			stdout = Files.newBufferedWriter(Paths.get(Constants.REPORT_FILENAME));
 
 		} catch (IOException e1) {		
 			e1.printStackTrace();
@@ -325,6 +326,7 @@ public class Database {
      			System.err.println("Error: cannot close stream: " + e.getMessage());
      			e.printStackTrace();
      		}
+     		System.out.println("Report written to " + Constants.REPORT_FILENAME);
     	}
     	
     	

@@ -45,20 +45,34 @@ if (Test-Path $current_file) {
     $last = Get-Content -tail 1 $current_file
     write-host "last line: $last"
  
+    # Lines are in the form:
+    #    <date>,"<user's name>",<checkins>,<time for that day>
     # Split the line at the commas
     $a = $last.split(",")
     $date = $a[0]       # Grab first element (the date - yyyy/mm/dd format)
-    write-host "date: $date"
+    write-host "Date from last line: $date"
  
     $date = $date -replace '"', ''  # Strip double quotes
     $date = $date -replace "/", "-" # Strip slashes
     $current_dated_file = "$PSScriptRoot\sync\current_" + "$date" + ".csv" 
 
-	write-host "here" + $current_dated_file + " " + $current_file
+    write-host "Backup current to: " + $current_dated_file
+
     # Backup current.csv regardless of existence
-    Copy-Item $current_file $current_dated_file
-    
+    try {
+        Copy-Item $current_file $current_dated_file -errorAction stop
+        write-host "Successfully copied" + $current_dated_file
+    } 
+    catch
+    {
+        write-host "Copy error: " + $_.exception.message
+    }
+
 }
 
+# Enable when debugging
+#Read-Host -Prompt "Press Enter to continue"
+
+
 # Generate the new report
-powershell -noprofile -executionpolicy bypass -file $PSScriptRoot\rfid_reader.ps1 --report
+powershell -noprofile -executionpolicy bypass -file $PSScriptRoot\rfid_reader.ps1 --report 
