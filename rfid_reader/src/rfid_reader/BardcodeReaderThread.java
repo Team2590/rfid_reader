@@ -16,15 +16,19 @@ import java.io.InputStreamReader;
 public class BardcodeReaderThread implements Runnable {
 
 	public void run() {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
-		String barcode; 
+
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+		//String barcode; 
+		NoEchoReader reader = new NoEchoReader();
 		
 		try {
 			
 			while (Boolean.TRUE) {
-				barcode = reader.readLine();
-				Debug.log("barcode: " + barcode);
-				RFIDreader.write_user(barcode, Constants.TagType.BARCODE);
+				char[] barcode = reader.readPassword();
+				
+				//barcode = reader.readLine();
+				Debug.log("barcode: " + String.valueOf(barcode));
+				RFIDreader.write_user(String.valueOf(barcode), Constants.TagType.BARCODE);
 			}
 			
 		} catch (IOException e) {

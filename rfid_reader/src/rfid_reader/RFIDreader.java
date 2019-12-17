@@ -90,6 +90,8 @@ import java.time.format.DateTimeFormatter;
 
 public class RFIDreader implements Runnable {
 	private static Database db;
+	private static Integer count = 0; 
+	
 
 	
 	public void run() {
@@ -112,7 +114,7 @@ public class RFIDreader implements Runnable {
 	        	// Pjw: Todo: filter list to just all ACR122s!!!
 	        	// Right now it's finding TPM drivers and other readers in addition to ours
 	            Debug.log("RFID readers detected: " + terminals.list());
-	            acr122 = terminals.getTerminal(Constants.READER_NAME);
+	            acr122 = terminals.getTerminal(Constants.READER_NAME);		// This just finds the first one. TODO: Need to iterate for multi-reader support
 	            if (acr122 == null) {
 	            	System.err.println("No ACR122 reader found. Connect a reader and try again."); 
 		            System.exit(1);
@@ -231,7 +233,7 @@ public class RFIDreader implements Runnable {
     	
     	//System.out.println("Place your card/tag/etc. on the reader to start"); 
     	System.out.println("Place your RFID tag on the reader to login in or out"); 
-    	System.out.println("OR read you school ID with the bardcode reader"); 
+    	System.out.println("OR read your school ID with the bardcode reader"); 
     	System.out.println("OR type in your student ID number..."); 
     	
     	(new Thread(new RFIDreader())).start(); // Start reading from the RFID card reader
@@ -441,12 +443,15 @@ public class RFIDreader implements Runnable {
 	public synchronized static void write_user(String uid, Constants.TagType type) {
 		String tagtype_name = (type == Constants.TagType.RFID) ? "RFID tag" : "Student ID";
 		Constants.LoginType login_type; 
-
+		
+		
 		UserTag user = UserTags.getUser(uid, type); 
 		
 		if (user != null) {
 			Debug.log("User is: " + user);
-			Debug.log("Scanning in via a " + tagtype_name);		
+			Debug.log("Scanning in via a " + tagtype_name);
+			count++;
+			Debug.log("Users processed thus far: " + count);
 
 			login_type = db.write(user.getUsername());	// Add this user's scan in or out to the DB
 			
